@@ -1,4 +1,6 @@
 const { response , request} = require ('express');
+const Usuario = require('../models/usuario');
+const bcryptjs = require ('bcryptjs');
 
 const usuariosGet =  (req=request, res = response) => {
     const {nombre, edad = 18} = req.query; // en este caso son los query params que pueden ser opcionales , hacemos la desestructuracion
@@ -10,13 +12,24 @@ const usuariosGet =  (req=request, res = response) => {
     })
   }
 
-const usuariosPost = (req, res = response) => {
-    const body = req.body;
+const usuariosPost = async (req, res = response) => {
+
+    const {nombre, correo, password, rol } = req.body;
+    const usuario = new Usuario(nombre, correo, password, rol);
+
+    // Validar si existe el correo
+
+    // Encriptar la contraseña 
+    const salt = bcrypt.genSaltSync(); // default 10
+    usuario.password = bcryptjs.hashSync(password, salt)
+  
+    await usuario.save();
+
 
     res.json ({
-        msg: 'post API controller',
-        body
+        usuario
     })
+
   }  
 
 const usuariosPut = (req, res = response) => {
