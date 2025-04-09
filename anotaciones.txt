@@ -22,5 +22,11 @@ patch:
 Para reconstruir los node modules hacer npm install
 
 
-# Consideraciones para el archivo .env
-PORT = $port
+***** FORMATO DE ARCHIVO .env ****
+PORT = <port>
+
+MONGODB_CNN=<url-mongo>/<cafeDB>
+
+
+USER=<db-user>
+PASSWORD=<db-password>

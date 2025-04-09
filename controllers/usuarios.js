@@ -2,6 +2,8 @@ const { response , request} = require ('express');
 const Usuario = require('../models/usuario');
 const bcryptjs = require ('bcryptjs');
 
+
+
 const usuariosGet =  (req=request, res = response) => {
     const {nombre, edad = 18} = req.query; // en este caso son los query params que pueden ser opcionales , hacemos la desestructuracion
 
