@@ -1,5 +1,6 @@
 const express = require ('express')
-const cors = require ('cors')
+const cors = require ('cors');
+const { dbConnection } = require('../database/config');
 
 
 class Server {
@@ -15,6 +16,9 @@ class Server {
 
         // Rutas de aplicacion 
         this.routes();   
+
+        // Conexion a la base de datos
+        this.conectarBD();
 
         this.usuariosPath = '/api/usuarios'; // Chequear porque no anda
         
@@ -39,6 +43,10 @@ class Server {
         this.app.use (express.static('public'));
 
     }
+
+    async conectarBD (){
+        await dbConnection();
+    }  
 }
 
 module.exports = Server
